@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,33 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tms.exception.IssueNotFoundException;
 import com.tms.model.IssueEntity;
 import com.tms.service.IssueService;
+import com.tms.service.StaffService;
 
 @RestController
-@RequestMapping("/issues")
-public class IssueController {
+@RequestMapping("/staff")
+public class StaffController {
 	@Autowired
-	IssueService issueService;
+	StaffService staffservice;
+	@Autowired
+	IssueService issueservice;
 
-	@GetMapping("/allissue")
+	@GetMapping("/allissues")
 	public List<IssueEntity> findAll() {
-		return issueService.displayAllIssue();
-	}
-
-	@GetMapping("/{issueId}")
-	public ResponseEntity<IssueEntity> findIssueById(@PathVariable int issueId) throws IssueNotFoundException {
-		IssueEntity issue = issueService.displayIssueById(issueId)
-				.orElseThrow(() -> new IssueNotFoundException("Sorry! No Issue Found with the given ID " + issueId));
-		return ResponseEntity.ok().body(issue);
-	}
-
-	@PostMapping("/createissue")
-	public IssueEntity createIssue(@RequestBody IssueEntity issue) {
-		return issueService.createNewIssue(issue);
+		return issueservice.displayAllIssue();
 	}
 
 	@PutMapping("/updateissue")
 	public ResponseEntity<IssueEntity> updateIssue(@RequestBody IssueEntity issue) throws IssueNotFoundException {
-		IssueEntity updatedIssue = issueService.updateIssueAsResolved(issue);
+		IssueEntity updatedIssue = issueservice.updateIssueAsResolved(issue);
 		return ResponseEntity.ok(updatedIssue);
 	}
+
 }

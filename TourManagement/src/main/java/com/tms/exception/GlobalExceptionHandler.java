@@ -21,6 +21,14 @@ public class GlobalExceptionHandler {
 		errMsg.setErrorMessage(ex.getMessage());
 		return new ResponseEntity(errMsg, HttpStatus.OK);
 	}
+	@ExceptionHandler(IdNotFoundException.class)
+	public ResponseEntity<ErrorMessage> dataNotFound(IdNotFoundException ex)
+	{
+		ErrorMessage errMsg = new ErrorMessage();
+		errMsg.setErrorCode(HttpStatus.NOT_FOUND.value());
+		errMsg.setErrorMessage(ex.getMessage());
+		return new ResponseEntity(errMsg, HttpStatus.OK);
+	}
 	@ExceptionHandler(TourPackageNotFoundException.class)
 	public ResponseEntity<ErrorMessage> handleTourPackageNotFoundException(TourPackageNotFoundException ex){
 		ErrorMessage errMsg = new ErrorMessage();

@@ -19,25 +19,23 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Optional<CustomerEntity> getCustomerById(int userId) {
 		return customerrepository.findById(userId);
-		
+
 	}
 
 	@Override
 	public CustomerEntity insertCustomer(CustomerEntity customer) {
 		return customerrepository.save(customer);
-		
+
 	}
-	/*
-	 * @Override public Issue raiseIssue(Issue issue, int userId) { return ; }
-	 * 
-	 * @Override public boolean validateUser(int userId, String password) { return ;
-	 * 
-	 * }
-	 */
+
+	@Override
+	public boolean validateCustomer(int userId, String UserPassword) {
+		return customerrepository.validateCustomer(userId, UserPassword);
+
+	}
 
 	@Override
 	public List<CustomerEntity> displayAllCustomer() {
-		// TODO Auto-generated method stub
 		return customerrepository.findAll();
 	}
 

@@ -22,38 +22,45 @@ import com.tms.service.TourPackageService;
 public class TourPackageController {
 	@Autowired
 	private TourPackageService tourpackageService;
-	
-	@PostMapping("")
+
+	@PostMapping("/createnewpackage")
 	public TourPackageEntity createTourPackage(@RequestBody TourPackageEntity tour) {
-	
-	     return tourpackageService.createTourPackage(tour);
+		return tourpackageService.createTourPackage(tour);
 	}
-	
-	@GetMapping("")
-	public List<TourPackageEntity> getAllTourPackages(){
+
+	@GetMapping("/all")
+	public List<TourPackageEntity> getAllTourPackages() {
 		return tourpackageService.getAllTourPackages();
 	}
-	
+
 	@GetMapping("/{packageId}")
-	public ResponseEntity<TourPackageEntity> getTourPackageById(@PathVariable(value= "packageId") int packageId) throws TourPackageNotFoundException	{
-		
-		TourPackageEntity tour = tourpackageService.getTourPackageById(packageId).orElseThrow(()-> new TourPackageNotFoundException("No Tour Package Found With this Id : "+packageId));
+	public ResponseEntity<TourPackageEntity> getTourPackageById(@PathVariable(value = "packageId") int packageId)
+			throws TourPackageNotFoundException {
+
+		TourPackageEntity tour = tourpackageService.getTourPackageById(packageId).orElseThrow(
+				() -> new TourPackageNotFoundException("No Tour Package Found With this Id : " + packageId));
 		return ResponseEntity.ok().body(tour);
 	}
-	@GetMapping("/tourpackages/{packageName}")
-	public List<TourPackageEntity> getTourPackageByName(@PathVariable(value= "packageName") String packageName){
+
+	@GetMapping("/tourbyname/{packageName}")
+	public List<TourPackageEntity> getTourPackageByName(@PathVariable(value = "packageName") String packageName) {
 		return tourpackageService.getTourPackageByName(packageName);
 	}
-	@PutMapping("")
-	public ResponseEntity<TourPackageEntity> updateTourPackage(@PathVariable(value= "packageid") int packageId, @RequestBody TourPackageEntity tour) throws TourPackageNotFoundException {
-		TourPackageEntity tourpackage = tourpackageService.getTourPackageById(packageId).orElseThrow(()-> new TourPackageNotFoundException("Noo Tour Package Found With this Id : "+packageId));
+
+	@PutMapping("/update")
+	public ResponseEntity<TourPackageEntity> updateTourPackage(@PathVariable(value = "packageid") int packageId,
+			@RequestBody TourPackageEntity tour) throws TourPackageNotFoundException {
+		TourPackageEntity tourpackage = tourpackageService.getTourPackageById(packageId).orElseThrow(
+				() -> new TourPackageNotFoundException("Noo Tour Package Found With this Id : " + packageId));
 		tourpackage.setTrip_Price(tour.getTrip_Price());
 		TourPackageEntity updateTourPackage = tourpackageService.updateTourPackage(tourpackage);
 		return ResponseEntity.ok(updateTourPackage);
 	}
+
 	@DeleteMapping("/delete/{id}")
-	public String deleteTourPackage(@PathVariable(value= "id") int tourpackageId) throws TourPackageNotFoundException {
-		TourPackageEntity tourpackage = tourpackageService.getTourPackageById(tourpackageId).orElseThrow(()-> new TourPackageNotFoundException("Noo Tour Package Found With this Id : "+tourpackageId));
+	public String deleteTourPackage(@PathVariable(value = "id") int tourpackageId) throws TourPackageNotFoundException {
+		TourPackageEntity tourpackage = tourpackageService.getTourPackageById(tourpackageId).orElseThrow(
+				() -> new TourPackageNotFoundException("Noo Tour Package Found With this Id : " + tourpackageId));
 		tourpackageService.deleteTourPackage(tourpackage);
 		return "TourPackage Delete";
 	}

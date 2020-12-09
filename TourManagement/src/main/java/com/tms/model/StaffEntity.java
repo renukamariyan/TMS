@@ -9,9 +9,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-
 @Entity
-@Table(name="Staff")
+@Table(name = "Staff")
 public class StaffEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,8 +26,8 @@ public class StaffEntity {
 	public StaffEntity() {
 	}
 
-	public StaffEntity(String staffId, String password, String name, String emailId,
-			int age, String gender, String address, long phoneNo) {
+	public StaffEntity(String staffId, String password, String name, String emailId, int age, String gender,
+			String address, long phoneNo) {
 		super();
 		this.password = password;
 		this.name = name;
@@ -98,12 +97,11 @@ public class StaffEntity {
 	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", emailId=" +emailId + ", age=" + age+ 
-				",  password=" + password + ", gender=" +gender+ ", emailId=" +emailId +
-				", address=" +address + ", phoneNo=" + phoneNo + "]";
+		return "Staff [staffId=" + staffId + ", emailId=" + emailId + ", age=" + age + ",  password=" + password
+				+ ", gender=" + gender + ", emailId=" + emailId + ", address=" + address + ", phoneNo=" + phoneNo + "]";
 	}
 
 }

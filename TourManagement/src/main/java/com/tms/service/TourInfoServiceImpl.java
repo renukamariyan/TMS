@@ -14,6 +14,7 @@ public class TourInfoServiceImpl implements TourInfoService {
 
 	@Autowired
 	private TourInfoRepository tourInfoRepo;
+
 	@Override
 	public List<TourInfoEntity> displayAllTourInfo() {
 		return tourInfoRepo.findAll();
@@ -25,18 +26,23 @@ public class TourInfoServiceImpl implements TourInfoService {
 	}
 
 	@Override
-	public TourInfoEntity updatePaymentStatus(int id) throws RecordNotFoundException {
-		
-			TourInfoEntity update=tourInfoRepo.findById(id).orElseThrow(()-> new RecordNotFoundException("Given info Id does not exist"));
-		    update.setPaymentStatus(true);
-			return tourInfoRepo.save(update);
-		}
+	public TourInfoEntity updatePaymentStatus(TourInfoEntity tour) throws RecordNotFoundException {
+
+		if (tourInfoRepo.findById(tour.getTourId()) != null) {
+
+			tour.setPaymentStatus(true);
+			return tourInfoRepo.save(tour);
+		} else
+			throw new RecordNotFoundException("Given info Id does not exist");
+	}
 
 	@Override
-	public void cancelTourPackage(int id) throws RecordNotFoundException {
-		TourInfoEntity update=tourInfoRepo.findById(id).orElseThrow(()-> new RecordNotFoundException("Given info Id does not exist"));
-	    update.setReservationStatus(false);
-		
+	public String cancelTourPackage(int id) throws RecordNotFoundException {
+		TourInfoEntity update = tourInfoRepo.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Given info Id does not exist"));
+
+		update.setReservationStatus(false);
+		return "Cancelled Succesfully";
 	}
 
 }

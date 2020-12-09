@@ -33,9 +33,12 @@ public class TourPackageServiceImpl implements TourPackageService {
 
 	public TourPackageEntity updateTourPackage(TourPackageEntity tour) {
 		return tourpackageRepo.save(tour);
+
 	}
 
-	public void deleteTourPackage(TourPackageEntity tour) {
+	public String deleteTourPackage(TourPackageEntity tour) {
 		tourpackageRepo.delete(tour);
+		;
+		return "package Successfully deleted";
 	}
 }

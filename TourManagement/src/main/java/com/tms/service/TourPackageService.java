@@ -21,5 +21,5 @@ public interface TourPackageService {
 
 	public TourPackageEntity updateTourPackage(TourPackageEntity tour);
 
-	public void deleteTourPackage(TourPackageEntity tour);
+	public String deleteTourPackage(TourPackageEntity tour);
 }

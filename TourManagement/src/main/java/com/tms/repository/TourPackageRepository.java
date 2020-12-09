@@ -10,6 +10,9 @@ package com.tms.repository;
 	@Repository
 	public interface TourPackageRepository extends JpaRepository <TourPackageEntity,Integer>{
 	 public List<TourPackageEntity> findByPackageName(String packageName);
+
+	
+	
 	}
 
 

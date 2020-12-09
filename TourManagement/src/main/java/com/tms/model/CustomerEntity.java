@@ -1,4 +1,5 @@
 package com.tms.model;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -7,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="cust_info")
-public class CustomerEntity implements Serializable{
+@Table(name = "cust_info")
+public class CustomerEntity implements Serializable {
 	/**
 	 * 
 	 */
@@ -31,8 +33,6 @@ public class CustomerEntity implements Serializable{
 
 	public CustomerEntity() {
 	}
-	
-
 
 	public CustomerEntity(int userId, String userPassword, String name, String emailId, int age, long phoneNo) {
 		super();
@@ -44,8 +44,6 @@ public class CustomerEntity implements Serializable{
 		this.phoneNo = phoneNo;
 	}
 
-
-
 	public int getUserId() {
 		return userId;
 	}
@@ -54,7 +52,7 @@ public class CustomerEntity implements Serializable{
 		this.userId = userId;
 	}
 
-   public String getPassword() {
+	public String getPassword() {
 		return userPassword;
 	}
 
@@ -93,7 +91,6 @@ public class CustomerEntity implements Serializable{
 	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-
 
 	@Override
 	public String toString() {

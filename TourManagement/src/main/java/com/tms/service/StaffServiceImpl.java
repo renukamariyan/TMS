@@ -12,33 +12,27 @@ import com.tms.repository.IssueRepository;
 import com.tms.repository.StaffRepository;
 
 @Service
-public class StaffServiceImpl implements StaffService{
-	
+public class StaffServiceImpl implements StaffService {
+
 	@Autowired
 	IssueRepository issueRepository;
-	@Autowired 
+	@Autowired
 	StaffRepository staffRepository;
-	
+
 	@Override
 	public List<IssueEntity> displayAllIssue() {
 		return issueRepository.findAll();
 	}
 
-
 	@Override
 	public IssueEntity updateIssueAsResolved(IssueEntity issue) {
-		if(issueRepository.findById(issue.getIssueId())!=null){
-		    issue.setIssueStatus("Resolved");
+		if (issueRepository.findById(issue.getIssueId()) != null) {
+			issue.setIssueStatus("Resolved");
 			return issueRepository.save(issue);
 		}
-		
+
 		else
 			return null;
 	}
-	
-	
-	
-	
-		
-		
-	}
+
+}

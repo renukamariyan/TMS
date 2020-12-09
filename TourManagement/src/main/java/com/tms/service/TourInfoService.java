@@ -14,7 +14,9 @@ public interface TourInfoService {
 
 	public abstract TourInfoEntity confirmTour(TourInfoEntity pack);
 
-	public abstract TourInfoEntity updatePaymentStatus(int id) throws RecordNotFoundException ;
+	public abstract TourInfoEntity updatePaymentStatus(TourInfoEntity tour) throws RecordNotFoundException ;
 
-	public abstract void cancelTourPackage(int id) throws RecordNotFoundException ;
+	public abstract String cancelTourPackage(int id) throws RecordNotFoundException ;
+
+	
 }

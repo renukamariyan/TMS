@@ -12,16 +12,16 @@ import com.tms.model.IssueEntity;
 import com.tms.repository.IssueRepository;
 
 @Service
-public class IssueServiceImpl implements IssueService{
-	
+public class IssueServiceImpl implements IssueService {
+
 	@Autowired
 	IssueRepository issueRepository;
+
 	@Override
 	public IssueEntity createNewIssue(IssueEntity issue) {
 		return issueRepository.save(issue);
 	}
 
-	
 	@Override
 	public List<IssueEntity> displayAllIssue() {
 		return issueRepository.findAll();
@@ -33,19 +33,14 @@ public class IssueServiceImpl implements IssueService{
 	}
 
 	@Override
-	public IssueEntity updateIssueAsResolved(IssueEntity issue)throws IssueNotFoundException {
-		if(issueRepository.findById(issue.getIssueId())!=null){
-		    issue.setIssueStatus("Resolved");
+	public IssueEntity updateIssueAsResolved(IssueEntity issue) throws IssueNotFoundException {
+		if (issueRepository.findById(issue.getIssueId()) != null) {
+			issue.setIssueStatus("Resolved");
 			return issueRepository.save(issue);
 		}
-		
+
 		else
 			throw new IssueNotFoundException("Given Issue Id does not exist");
 	}
 
-	
-		
-		
-	}
-
-
+}
