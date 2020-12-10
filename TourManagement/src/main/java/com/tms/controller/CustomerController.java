@@ -27,12 +27,12 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerservice;
 
-	@GetMapping("")
+	@GetMapping("/findall")
 	public List<CustomerEntity> findAll() {
 		return customerservice.displayAllCustomer();
 	}
 
-	@PostMapping("")
+	@PostMapping("/insert")
 	public CustomerEntity insertCustomer(@RequestBody CustomerEntity customer) {
 		CustomerEntity insert = customerservice.insertCustomer(customer);
 		return insert;
@@ -61,14 +61,14 @@ public class CustomerController {
 	 * 
 	 * }
 	 */
-	@GetMapping("/{userId}")
+	@GetMapping("byid/{userId}")
 	public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable int userId) throws CustomerNotFoundException {
 		CustomerEntity customer = customerservice.getCustomerById(userId).orElseThrow(
 				() -> new CustomerNotFoundException("Sorry! No customer Found with the given ID " + userId));
 		return ResponseEntity.ok().body(customer);
 	}
 
-	@GetMapping("/{userId}/{userPassword}")
+	@GetMapping("validate/{userId}/{userPassword}")
 	public ResponseEntity<String> validateCustomer(@PathVariable("userId") int userId,
 			@PathVariable("userPassword") String userPassword) {
 		boolean status = customerservice.validateCustomer(userId, userPassword);
